@@ -1,4 +1,4 @@
-from nonebot import require
+from nonebot import require, logger
 from nonebot.plugin import PluginMetadata
 from .config import Config
 from .db_action import init_database
@@ -20,6 +20,8 @@ __plugin_meta__ = PluginMetadata(
     supported_adapters={"~onebot.v11"},
     extra={"author": "HTony03 <HTony03@foxmail.com>"},
 )
+VERSION = '0.1.0'
+logger.info(f" initalizing {VERSION}.")
 
 BASEURL = 'https://sunsetbot.top/static/media/map'
 
