@@ -34,13 +34,13 @@ async def test_pip(app: App):
 
     assert require("nonebot_plugin_sunset_reminder")
 
-    event = make_onebot_msg(Message("pip install nonebot2"))
+    event = make_onebot_msg(Message("最近日落火烧云提醒"))
     try:
-        from nonebot_plugin_sunset_reminder import pip
+        from nonebot_plugin_sunset_reminder.commands import latest_sunset_reminder
     except ImportError:
-        pytest.skip("nonebot_plugin_sunset_reminder.pip not found")
+        pytest.skip("nonebot_plugin_sunset_reminder.commands.latest_sunset_reminder not found")
 
-    async with app.test_matcher(pip) as ctx:
+    async with app.test_matcher(latest_sunset_reminder) as ctx:
         adapter = nonebot.get_adapter(OnebotV11Adapter)
         bot = ctx.create_bot(base=Bot, adapter=adapter)
         ctx.receive_event(bot, event)

@@ -1,44 +1,25 @@
 from nonebot import logger, require
-from nonebot.plugin import PluginMetadata, inherit_supported_adapters
+from nonebot.plugin import PluginMetadata
+from .config import Config
+from .db_action import init_database
+from .commands import sunset_reminder_command  # NOQA: F401
+from .reminder import notify, get_cloud_image, noon_job, night_job  # NOQA: F401
 
-require("nonebot_plugin_waiter")
-require("nonebot_plugin_uninfo")
-require("nonebot_plugin_alconna")
 require("nonebot_plugin_localstore")
 require("nonebot_plugin_apscheduler")
-from .config import Config
+
 
 __plugin_meta__ = PluginMetadata(
-    name="名称",
-    description="描述",
-    usage="用法",
+    name="nonebot_plugin_sunset_reminder",
+    description="a plugin to inform flame cloud infos.",
+    usage="a plugin to inform flame cloud infos.",
     type="application",  # library
     homepage="https://github.com/HTony03/nonebot-plugin-sunset-reminder",
     config=Config,
-    supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna", "nonebot_plugin_uninfo"),
-    # supported_adapters={"~onebot.v11"}, # 仅 onebot 应取消注释
-    extra={"author": "HTony03 <your@mail.com>"},
+    supported_adapters={"~onebot.v11"},
+    extra={"author": "HTony03 <HTony03@foxmail.com>"},
 )
 
-from arclet.alconna import Alconna, Args, Arparma, Option, Subcommand
-from nonebot_plugin_alconna import on_alconna
-from nonebot_plugin_alconna.uniseg import UniMessage
+BASEURL = 'https://sunsetbot.top/static/media/map'
 
-pip = on_alconna(
-    Alconna(
-        "pip",
-        Subcommand(
-            "install",
-            Args["package", str],
-            Option("-r|--requirement", Args["file", str]),
-            Option("-i|--index-url", Args["url", str]),
-        ),
-    )
-)
-
-
-@pip.handle()
-async def _(result: Arparma):
-    package: str = result.other_args["package"]
-    logger.info(f"installing {package}")
-    await UniMessage.text(package).send()
+init_database()
