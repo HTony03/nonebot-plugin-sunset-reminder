@@ -1,9 +1,10 @@
-from nonebot import logger, require
+from nonebot import require
 from nonebot.plugin import PluginMetadata
 from .config import Config
 from .db_action import init_database
 from .commands import sunset_reminder_command  # NOQA: F401
-from .reminder import notify, get_cloud_image, noon_job, night_job  # NOQA: F401
+from .reminder import (notify, get_cloud_image,  # NOQA: F401
+                       noon_job, night_job)  # NOQA: F401
 
 require("nonebot_plugin_localstore")
 require("nonebot_plugin_apscheduler")

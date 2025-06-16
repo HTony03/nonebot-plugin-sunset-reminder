@@ -20,6 +20,7 @@ parser.add_argument("-t", "--type", action="store", choices=['rise', 'set', '日
 
 search = on_shell_command("search", aliases={'查询火烧云信息', '火烧云查询'}, parser=parser, block=True)
 
+
 @on_command('latest_sunset_remind', aliases={"最近日落火烧云提醒"}, priority=5).handle(
     parameterless=[Cooldown(15, prompt="调用过快")])
 async def sunset_reminder_command(bot: Bot, event: MessageEvent) -> None:
@@ -53,7 +54,9 @@ async def handle_function(args: Namespace = ShellCommandArgs()):
 
     day = args.day
     type_ = args.type
-    type_str = f'{'set' if type_ in ('set', '日落') else 'rise'}_{1 if day in ("today", '今天') else 2}'
+    event_type = "set" if type_ in ("set", "日落") else "rise"
+    day_num = 1 if day in ("today", "今天") else 2
+    type_str = f"{event_type}_{day_num}"
 
     async with aiohttp.ClientSession() as session:
         async with session.get(
