@@ -1,5 +1,5 @@
 from typing import Literal
-from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, Message
+from nonebot.adapters.onebot.v11 import Bot
 from nonebug import App
 import pytest
 

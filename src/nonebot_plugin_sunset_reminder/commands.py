@@ -67,8 +67,6 @@ async def handle_function(args: Namespace = ShellCommandArgs()):
             data = await response.json()
             if not data:
                 await search.finish("未找到相关结果。")
-
-    # 这里可以添加实际的查询逻辑
     out = ''
     out += data.get('img_summary', '未找到城市信息。').replace('&ensp;<b>', '').replace('</b>', '') + '\n'
     out += f"鲜艳度: {data.get('tb_aod', '无数据').replace('<br>', '')}\n"
