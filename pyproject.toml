@@ -6,7 +6,6 @@ readme = "README.md"
 authors = [
   { name = "HTony03", email = "HTony03@foxmail.com" },
 ]
-urls = { Repository = "https://github.com/HTony03/nonebot-plugin-sunset-reminder" }
 keywords = ["nonebot", "flame cloud", "reminder"]
 classifiers = [
     "Development Status :: 3 - Alpha",
